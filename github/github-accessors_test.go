@@ -4685,6 +4685,86 @@ func TestCreateOrUpdateCustomRoleOptions_GetName(tt *testing.T) {
 	c.GetName()
 }
 
+func TestCreatePagesDeploymentOptions_GetArtifactUrl(tt *testing.T) {
+	var zeroValue string
+	c := &CreatePagesDeploymentOptions{ArtifactUrl: &zeroValue}
+	c.GetArtifactUrl()
+	c = &CreatePagesDeploymentOptions{}
+	c.GetArtifactUrl()
+	c = nil
+	c.GetArtifactUrl()
+}
+
+func TestCreatePagesDeploymentOptions_GetEnvironment(tt *testing.T) {
+	var zeroValue string
+	c := &CreatePagesDeploymentOptions{Environment: &zeroValue}
+	c.GetEnvironment()
+	c = &CreatePagesDeploymentOptions{}
+	c.GetEnvironment()
+	c = nil
+	c.GetEnvironment()
+}
+
+func TestCreatePagesDeploymentOptions_GetOIDCToken(tt *testing.T) {
+	var zeroValue string
+	c := &CreatePagesDeploymentOptions{OIDCToken: &zeroValue}
+	c.GetOIDCToken()
+	c = &CreatePagesDeploymentOptions{}
+	c.GetOIDCToken()
+	c = nil
+	c.GetOIDCToken()
+}
+
+func TestCreatePagesDeploymentOptions_GetPagesBuildVersion(tt *testing.T) {
+	var zeroValue string
+	c := &CreatePagesDeploymentOptions{PagesBuildVersion: &zeroValue}
+	c.GetPagesBuildVersion()
+	c = &CreatePagesDeploymentOptions{}
+	c.GetPagesBuildVersion()
+	c = nil
+	c.GetPagesBuildVersion()
+}
+
+func TestCreatePagesDeploymentOptions_GetPreview(tt *testing.T) {
+	var zeroValue bool
+	c := &CreatePagesDeploymentOptions{Preview: &zeroValue}
+	c.GetPreview()
+	c = &CreatePagesDeploymentOptions{}
+	c.GetPreview()
+	c = nil
+	c.GetPreview()
+}
+
+func TestCreatePagesDeploymentResponse_GetPageURL(tt *testing.T) {
+	var zeroValue string
+	c := &CreatePagesDeploymentResponse{PageURL: &zeroValue}
+	c.GetPageURL()
+	c = &CreatePagesDeploymentResponse{}
+	c.GetPageURL()
+	c = nil
+	c.GetPageURL()
+}
+
+func TestCreatePagesDeploymentResponse_GetPreviewURL(tt *testing.T) {
+	var zeroValue string
+	c := &CreatePagesDeploymentResponse{PreviewURL: &zeroValue}
+	c.GetPreviewURL()
+	c = &CreatePagesDeploymentResponse{}
+	c.GetPreviewURL()
+	c = nil
+	c.GetPreviewURL()
+}
+
+func TestCreatePagesDeploymentResponse_GetStatusURL(tt *testing.T) {
+	var zeroValue string
+	c := &CreatePagesDeploymentResponse{StatusURL: &zeroValue}
+	c.GetStatusURL()
+	c = &CreatePagesDeploymentResponse{}
+	c.GetStatusURL()
+	c = nil
+	c.GetStatusURL()
+}
+
 func TestCreateProtectedChanges_GetFrom(tt *testing.T) {
 	var zeroValue bool
 	c := &CreateProtectedChanges{From: &zeroValue}

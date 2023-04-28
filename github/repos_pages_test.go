@@ -449,6 +449,41 @@ func TestRepositoriesService_RequestPageBuild(t *testing.T) {
 	})
 }
 
+func TestRepositoriesService_CreatePagesDeployment(t *testing.T) {
+	client, mux, _, teardown := setup()
+	defer teardown()
+
+	mux.HandleFunc("/repos/o/r/pages/deployment", func(w http.ResponseWriter, r *http.Request) {
+		testMethod(t, r, "POST")
+		fmt.Fprint(w, `{"status_url":"su","page_url":"pu"}`)
+	})
+
+	ctx := context.Background()
+	status, _, err := client.Repositories.CreatePagesDeployment(ctx, "o", "r", &CreatePagesDeploymentOptions{})
+	if err != nil {
+		t.Errorf("Repositories.RequestPageBuild returned error: %v", err)
+	}
+
+	want := &CreatePagesDeploymentResponse{StatusURL: String("su"), PageURL: String("pu")}
+	if !cmp.Equal(status, want) {
+		t.Errorf("Repositories.RequestPageBuild returned %+v, want %+v", status, want)
+	}
+
+	const methodName = "CreatePagesDeployment"
+	testBadOptions(t, methodName, func() (err error) {
+		_, _, err = client.Repositories.CreatePagesDeployment(ctx, "\n", "\n", nil)
+		return err
+	})
+
+	testNewRequestAndDoFailure(t, methodName, client, func() (*Response, error) {
+		got, resp, err := client.Repositories.CreatePagesDeployment(ctx, "o", "r", &CreatePagesDeploymentOptions{})
+		if got != nil {
+			t.Errorf("testNewRequestAndDoFailure %v = %#v, want nil", methodName, got)
+		}
+		return resp, err
+	})
+}
+
 func TestRepositoriesService_GetPageHealthCheck(t *testing.T) {
 	client, mux, _, teardown := setup()
 	defer teardown()

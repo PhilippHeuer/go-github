@@ -3990,6 +3990,70 @@ func (c *CreateOrUpdateCustomRoleOptions) GetName() string {
 	return *c.Name
 }
 
+// GetArtifactUrl returns the ArtifactUrl field if it's non-nil, zero value otherwise.
+func (c *CreatePagesDeploymentOptions) GetArtifactUrl() string {
+	if c == nil || c.ArtifactUrl == nil {
+		return ""
+	}
+	return *c.ArtifactUrl
+}
+
+// GetEnvironment returns the Environment field if it's non-nil, zero value otherwise.
+func (c *CreatePagesDeploymentOptions) GetEnvironment() string {
+	if c == nil || c.Environment == nil {
+		return ""
+	}
+	return *c.Environment
+}
+
+// GetOIDCToken returns the OIDCToken field if it's non-nil, zero value otherwise.
+func (c *CreatePagesDeploymentOptions) GetOIDCToken() string {
+	if c == nil || c.OIDCToken == nil {
+		return ""
+	}
+	return *c.OIDCToken
+}
+
+// GetPagesBuildVersion returns the PagesBuildVersion field if it's non-nil, zero value otherwise.
+func (c *CreatePagesDeploymentOptions) GetPagesBuildVersion() string {
+	if c == nil || c.PagesBuildVersion == nil {
+		return ""
+	}
+	return *c.PagesBuildVersion
+}
+
+// GetPreview returns the Preview field if it's non-nil, zero value otherwise.
+func (c *CreatePagesDeploymentOptions) GetPreview() bool {
+	if c == nil || c.Preview == nil {
+		return false
+	}
+	return *c.Preview
+}
+
+// GetPageURL returns the PageURL field if it's non-nil, zero value otherwise.
+func (c *CreatePagesDeploymentResponse) GetPageURL() string {
+	if c == nil || c.PageURL == nil {
+		return ""
+	}
+	return *c.PageURL
+}
+
+// GetPreviewURL returns the PreviewURL field if it's non-nil, zero value otherwise.
+func (c *CreatePagesDeploymentResponse) GetPreviewURL() string {
+	if c == nil || c.PreviewURL == nil {
+		return ""
+	}
+	return *c.PreviewURL
+}
+
+// GetStatusURL returns the StatusURL field if it's non-nil, zero value otherwise.
+func (c *CreatePagesDeploymentResponse) GetStatusURL() string {
+	if c == nil || c.StatusURL == nil {
+		return ""
+	}
+	return *c.StatusURL
+}
+
 // GetFrom returns the From field if it's non-nil, zero value otherwise.
 func (c *CreateProtectedChanges) GetFrom() bool {
 	if c == nil || c.From == nil {

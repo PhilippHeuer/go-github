@@ -85,6 +85,13 @@ type PagesHealthCheckResponse struct {
 	AltDomain *PagesDomain `json:"alt_domain,omitempty"`
 }
 
+// CreatePagesDeploymentResponse represents the response given for the creation of a GitHub Pages deployment.
+type CreatePagesDeploymentResponse struct {
+	StatusURL  *string `json:"status_url"`
+	PageURL    *string `json:"page_url"`
+	PreviewURL *string `json:"preview_url,omitempty"`
+}
+
 // PagesHTTPSCertificate represents the HTTPS Certificate information for a GitHub Pages site.
 type PagesHTTPSCertificate struct {
 	State       *string  `json:"state,omitempty"`
@@ -149,6 +156,24 @@ type PagesUpdate struct {
 	Public *bool `json:"public,omitempty"`
 	// HTTPSEnforced specifies whether HTTPS should be enforced for the repository.
 	HTTPSEnforced *bool `json:"https_enforced,omitempty"`
+}
+
+// CreatePagesDeploymentOptions sets up parameters needed to create a GitHub Pages deployment.
+type CreatePagesDeploymentOptions struct {
+	// The URL of an artifact that contains the .zip or .tar of static assets to deploy.
+	// The artifact belongs to the repository.
+	ArtifactUrl *string `json:"artifact_url"`
+	// The target environment for this GitHub Pages deployment.
+	//  Default: github-pages
+	Environment *string `json:"environment,omitempty"`
+	// A unique string that represents the version of the build for this deployment.
+	//  Default: GITHUB_SHA
+	PagesBuildVersion *string `json:"pages_build_version"`
+	// The OIDC token issued by GitHub Actions certifying the origin of the deployment.
+	//  Default: GITHUB_SHA
+	OIDCToken *string `json:"oidc_token"`
+	// Generate a preview deployment.
+	Preview *bool `json:"preview"`
 }
 
 // UpdatePages updates GitHub Pages for the named repo.
@@ -278,6 +303,25 @@ func (s *RepositoriesService) RequestPageBuild(ctx context.Context, owner, repo 
 	}
 
 	build := new(PagesBuild)
+	resp, err := s.client.Do(ctx, req, build)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return build, resp, nil
+}
+
+// CreatePagesDeploymentOptions creates a GitHub Pages deployment for a repository.
+//
+// GitHub API docs: https://docs.github.com/en/rest/pages#create-a-github-pages-deployment
+func (s *RepositoriesService) CreatePagesDeployment(ctx context.Context, owner, repo string, opts *CreatePagesDeploymentOptions) (*CreatePagesDeploymentResponse, *Response, error) {
+	u := fmt.Sprintf("repos/%v/%v/pages/deployment", owner, repo)
+	req, err := s.client.NewRequest("POST", u, opts)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	build := new(CreatePagesDeploymentResponse)
 	resp, err := s.client.Do(ctx, req, build)
 	if err != nil {
 		return nil, resp, err
